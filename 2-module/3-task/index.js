@@ -8,8 +8,8 @@ let calculator = {
   },
 
   read(a, b) {
-    this.a = a >= 0 ? a : +prompt("a?", "");
-    this.b = b >= 0 ? b : +prompt("b?", "");
+    this.a = a;
+    this.b = b;
   },
 };
 
