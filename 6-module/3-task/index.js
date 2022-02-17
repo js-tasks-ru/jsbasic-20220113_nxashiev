@@ -67,14 +67,15 @@ export default class Carousel {
       this.position == -slideWidth * (this.slides.length - 1) ? "none" : "";
     leftArrow.style.display = this.position == 0 ? "none" : "";
 
-    this.slideNumber =
-      this.position == 0
-        ? 0
-        : this.position == -slideWidth
-        ? 1
-        : this.position == -slideWidth * 2
-        ? 2
-        : 3;
+    if (this.position == 0) {
+      this.slideNumber = 0;
+    } else if (this.position == -slideWidth) {
+      this.slideNumber = 1;
+    } else if (this.position == -slideWidth * 2) {
+      this.slideNumber = 2;
+    } else {
+      this.slideNumber = 3;
+    }
   }
 
   onBtnClick = (event) => {
