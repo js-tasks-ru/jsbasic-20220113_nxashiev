@@ -1,12 +1,12 @@
 import createElement from "../../assets/lib/create-element.js";
 
 export default class Carousel {
+  position = 0;
+  slideNumber = 0;
+
   constructor(slides) {
     this.slides = slides;
     this.elem = this.template();
-
-    this.position = 0;
-    this.slideNumber = 0;
 
     this.elem.addEventListener("click", (event) => this.onClick(event));
     this.elem.addEventListener("click", this.onBtnClick);
@@ -55,27 +55,19 @@ export default class Carousel {
 
     if (event.target.className.includes("right")) {
       this.position -= slideWidth;
+      this.slideNumber++;
     }
 
     if (event.target.className.includes("left")) {
       this.position += slideWidth;
+      this.slideNumber--;
     }
 
     carousel.style.transform = `translateX(${this.position}px)`;
 
     rightArrow.style.display =
-      this.position == -slideWidth * (this.slides.length - 1) ? "none" : "";
-    leftArrow.style.display = this.position == 0 ? "none" : "";
-
-    if (this.position == 0) {
-      this.slideNumber = 0;
-    } else if (this.position == -slideWidth) {
-      this.slideNumber = 1;
-    } else if (this.position == -slideWidth * 2) {
-      this.slideNumber = 2;
-    } else {
-      this.slideNumber = 3;
-    }
+      this.slideNumber == this.slides.length - 1 ? "none" : "";
+    leftArrow.style.display = this.slideNumber == 0 ? "none" : "";
   }
 
   onBtnClick = (event) => {
