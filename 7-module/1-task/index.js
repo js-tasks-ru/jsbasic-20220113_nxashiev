@@ -23,9 +23,10 @@ export default class RibbonMenu {
 
     <nav class="ribbon__inner">
     ${this.categories
-      .map((category) => {
-        return `
-          <a href="#" class="ribbon__item" data-id="${category.id}">${category.name}</a>`;
+      .map((category, index) => {
+        return index == 0
+          ? `<a href="#" class="ribbon__item ribbon__item_active" data-id="${category.id}">${category.name}</a>`
+          : `<a href="#" class="ribbon__item" data-id="${category.id}">${category.name}</a>`;
       })
       .join("")}
     </nav>
@@ -71,6 +72,10 @@ export default class RibbonMenu {
   }
 
   onBtnClick = (event) => {
+    if (event.target.tagName != "A") {
+      return;
+    }
+
     event.preventDefault();
 
     const ribbons = this.elem.querySelectorAll(".ribbon__item");
